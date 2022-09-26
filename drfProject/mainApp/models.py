@@ -16,4 +16,4 @@ class Coffee(models.Model):
     info = models.TextField(null=True)
     size = models.TextField(null=True)
     cold = models.TextField(null=True)
-    cups = models.TextField(null=True)
+    cups = models.IntegerField(null=True)
