@@ -14,6 +14,6 @@ class Coffee(models.Model):
     name = models.CharField(max_length=50) 
     price = models.IntegerField()  
     info = models.TextField(null=True)
-    size = models.TextField(null=True)
-    cold = models.TextField(null=True)
+    size = models.TextField(null=True,blank = True)
+    cold = models.TextField(null=True,blank = True)
     cups = models.IntegerField(null=True)
