@@ -8,12 +8,8 @@ class Review(models.Model):
     content = models.TextField()
     updated_at = models.DateTimeField(auto_now=True)
 
-
 class Coffee(models.Model):
-    id = models.AutoField(primary_key=True)
+    id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=50) 
-    price = models.IntegerField()  
-    info = models.TextField(null=True)
-    size = models.TextField(null=True,blank = True)
-    cold = models.TextField(null=True,blank = True)
     cups = models.IntegerField(null=True)
+
