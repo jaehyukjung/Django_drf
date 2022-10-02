@@ -64,23 +64,24 @@ def my_fun():
     audio = get_speech()
     text = kakao_stt(KAKAO_APP_KEY, "stream", audio)
 
-    arr = text.split()
+
     lst = []
-    coffee_list = ["아메리카노", "카페라떼", "바닐라라떼", "카푸치노", "카라멜마키야또", "돌체라떼", "에스프레소", "아포가토", "콜드브루", "콜드브루라떼"]
+    coffee_list = ["아메리카노", "카페 라떼", "바닐라 라떼", "카푸치노", "카라멜 마키야또", "돌체 라떼", "에스프레소", "아포가토", "콜드브루", "콜드브루 라떼",
+                    "블랙티","얼그레이","잉그리쉬 블랙퍼스트","카모마일","페퍼민트","팩스 어 피치","청포도 에이드","베리베리 에이드","패션 에이드"," 애플망고 에이드",
+                    "티라미슈","가나슈", "레드벨벳","뉴욕 치즈"
+                    ]
+
     
     ans_dic = {}
     for i in coffee_list:
         ans_dic[i] = 0
 
-    for coffee in arr:
-        for ans in ans_dic.keys():
-            if coffee == ans:
-                ans_dic[ans] += 1
+    for ans in ans_dic.keys():
+        if ans in text:
+            ans_dic[ans] += 1
 
     for ans in ans_dic:
         if ans_dic[ans] != 0:
             lst.append(ans)
-
+    
     return lst
-lst = my_fun()
-print(lst)
