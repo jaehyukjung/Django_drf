@@ -21,5 +21,6 @@ class KakaoTTS:
 
 
 if __name__ == '__main__':
-    tts = KakaoTTS("  주문이 완료되셨습니다. 저희 매장을 이용해 주셔서 감사합니다. ")
-    tts.save("[4단계]_완료_1.mp3")
+    tts = KakaoTTS(" 아아아아ㅏㅇ 빨리 클론 받아서 푸시 한번씩만 해주세요 들!! 브랜치는 각자 이름으로 ")
+    tts.save("fast.mp3")
+
