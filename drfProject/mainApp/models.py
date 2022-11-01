@@ -17,6 +17,7 @@ class Coffee(models.Model):
 class Member(models.Model):
     id = models.CharField(primary_key =True,max_length=12,unique=True)
     point = models.IntegerField(null=True)
+    
 
     def __str__(self):
         return self.id

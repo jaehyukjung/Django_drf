@@ -79,6 +79,8 @@ def my_fun():
     for ans in ans_dic.keys():
         if ans in text:
             ans_dic[ans] += 1
+    if "커피" in text:
+        ans_dic["아메리카노"] += 1
 
     for ans in ans_dic:
         if ans_dic[ans] != 0:
