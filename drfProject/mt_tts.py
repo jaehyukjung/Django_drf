@@ -1,7 +1,7 @@
-import requests
+import requests, key
 
 # 자신의 REST_API_KEY를 입력하세요!
-REST_API_KEY = '14eb9391acd95f167100f637cd776d71'
+REST_API_KEY = key.REST_API_KEY
 
 
 class KakaoTTS:
