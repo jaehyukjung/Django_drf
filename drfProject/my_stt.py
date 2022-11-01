@@ -1,4 +1,4 @@
-import os, requests, json
+import os, requests, json, key
 
 import speech_recognition as sr
 # os.environ.setdefault("DJANGO_SETTINGS_MODULE","drfProject.settings")
@@ -39,7 +39,7 @@ def my_fun():
 
 
     # 함수 호출부
-    KAKAO_APP_KEY = '14eb9391acd95f167100f637cd776d71'
+    KAKAO_APP_KEY = key.REST_API_KEY
 
 
     def get_speech():
