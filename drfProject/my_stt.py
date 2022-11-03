@@ -33,8 +33,12 @@ def my_fun():
             text = ""
             print("error! because ", res.json())
         else:
-            result = res.text[res.text.index('{"type":"finalResult"'):res.text.rindex('}') + 1]
-            text = json.loads(result).get('value')
+            try:
+                result = res.text[res.text.index('{"type":"finalResult"'):res.text.rindex('}') + 1]
+                text = json.loads(result).get('value')
+            except:
+                print(1)
+                text = ' '
 
         return text
 
@@ -60,10 +64,10 @@ def my_fun():
             print("Say something!")
             try:
                 result = recognizer.listen(source, timeout=5)
+                audio = result.get_raw_data()
             except:
-                print(0)
-                return 0
-            audio = result.get_raw_data()
+                print(1)
+                audio = 0
 
         return audio
 
@@ -106,3 +110,8 @@ def my_fun():
         return lst
     else:
         return []
+
+
+if __name__ == "__main__":
+    lst = my_fun()
+    print(lst)
