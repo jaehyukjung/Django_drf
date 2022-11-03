@@ -1,6 +1,7 @@
 import os, requests, json, key
 
 import speech_recognition as sr
+from threading import Timer
 # os.environ.setdefault("DJANGO_SETTINGS_MODULE","drfProject.settings")
 
 # import django
@@ -57,33 +58,51 @@ def my_fun():
         # 음성 수집
         with microphone as source:
             print("Say something!")
-            result = recognizer.listen(source)
+            try:
+                result = recognizer.listen(source, timeout=5)
+            except:
+                print(0)
+                return 0
             audio = result.get_raw_data()
 
         return audio
+
+
+    text = "  "
+    timeout = 5
+    t = Timer(timeout, print, ['Sorry, times up'])
+    t.start()
     audio = get_speech()
-    text = kakao_stt(KAKAO_APP_KEY, "stream", audio)
+    if audio != 0:
+        text = kakao_stt(KAKAO_APP_KEY, "stream", audio)
+        t.cancel()
+        text = text.replace(' ','')
+        
+        coffee_list = ["아메리카노", "카페 라떼", "바닐라 라떼", "카푸치노", "카라멜 마키야또", "돌체 라떼", "에스프레소", "아포가토", "콜드브루", "콜드브루 라떼",
+                        "블랙티","얼그레이","잉그리쉬 블랙퍼스트","카모마일","페퍼민트","팩스 어 피치","청포도 에이드","베리베리 에이드","패션 에이드"," 애플망고 에이드",
+                        "티라미슈","가나슈", "레드벨벳","뉴욕 치즈"
+                        ]
+        coffee_list2 = ["아메리카노", "카페라떼", "바닐라라떼", "카푸치노", "카라멜마키야또", "돌체라떼", "에스프레소", "아포가토", "콜드브루", "콜드브루라떼",
+                        "블랙티","얼그레이","잉그리쉬 블랙퍼스트","카모마일","페퍼민트","팩스어피치","청포도에이드","베리베리에이드","패션에이드"," 애플망고에이드",
+                        "티라미슈","가나슈", "레드벨벳","뉴욕 치즈"
+                        ]
 
+        ans_dic = {} 
+        lst =[]
+        for i in coffee_list:
+            ans_dic[i] = 0
 
-    lst = []
-    coffee_list = ["아메리카노", "카페 라떼", "바닐라 라떼", "카푸치노", "카라멜 마키야또", "돌체 라떼", "에스프레소", "아포가토", "콜드브루", "콜드브루 라떼",
-                    "블랙티","얼그레이","잉그리쉬 블랙퍼스트","카모마일","페퍼민트","팩스 어 피치","청포도 에이드","베리베리 에이드","패션 에이드"," 애플망고 에이드",
-                    "티라미슈","가나슈", "레드벨벳","뉴욕 치즈"
-                    ]
+        for i in range(len(coffee_list2)):
+            if coffee_list2[i] in text:
+                ans_dic[coffee_list[i]] += 1
 
-    
-    ans_dic = {}
-    for i in coffee_list:
-        ans_dic[i] = 0
+        if "커피" in text:
+            ans_dic["아메리카노"] += 1
 
-    for ans in ans_dic.keys():
-        if ans in text:
-            ans_dic[ans] += 1
-    if "커피" in text:
-        ans_dic["아메리카노"] += 1
-
-    for ans in ans_dic:
-        if ans_dic[ans] != 0:
-            lst.append(ans)
-    
-    return lst
+        for ans in ans_dic:
+            if ans_dic[ans] != 0:
+                lst.append(ans)
+        
+        return lst
+    else:
+        return []
